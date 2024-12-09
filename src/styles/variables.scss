@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+   --main-font: "Jost", sans-serif;
+}
+
+.dark {
+    --main-bg-color: #040914;
+    --text-color: var(--main-bg-color);
+    --action-btn-bg-color: #574AE2;
+    --action-btn-text-color: var(--main-bg-color);
+}
+
+.light {
+    --main-bg-color: #FAF6F6;
+    --text-color: $main-bg-color;
+}
+
+
+
