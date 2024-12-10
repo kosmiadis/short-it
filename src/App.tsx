@@ -3,6 +3,7 @@ import './styles/global.css';
 import HomePage from "./pages/HomePage/HomePage";
 import CoreLayout from "./components/layouts/CoreLayout";
 import CoreErrorPage from "./pages/Error/CoreErrorPage";
+import ThemeProvider from "./store/ThemeProvider";
 
 const router = createBrowserRouter([
   {path: '/', element: <CoreLayout />, children: [
@@ -13,7 +14,9 @@ const router = createBrowserRouter([
 
 const App: React.FC = () => {
   return <>
-    <RouterProvider router={router} />
+    <ThemeProvider>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </>
 }
 

@@ -1,14 +1,13 @@
-import Button from "../ui/Button";
+import NavActions from './NavActions';
 import Logo from "./Logo";
 
 const NavItems: React.FC = () => {
     
     const brand = 'Short-It';
 
-    return <nav>
+    return <nav className="flex justify-content-between">
         <Logo text={brand} />
-        <Button>Login</Button>
-        <Button>Sign Up</Button>
+        <NavActions />
     </nav>
 }
 

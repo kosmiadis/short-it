@@ -1,14 +1,9 @@
-import { useTheme } from "../../store/ThemeProvider";
-import Button from "../ui/Button";
 import NavItems from "./NavItems";
 
 const Navbar: React.FC = () => {
   
-  const { toggleTheme } = useTheme();
-  
-  return <header>
+  return <header className="wrapper-padding">
       <NavItems />
-      <Button onClick={toggleTheme}>Toggle Theme</Button>
   </header>
 }
 

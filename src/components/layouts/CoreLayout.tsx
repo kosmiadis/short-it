@@ -1,16 +1,20 @@
-import ThemeProvider, { useTheme } from "../../store/ThemeProvider";
+import { useTheme } from "../../store/ThemeProvider";
+import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 import { Outlet } from "react-router-dom";
+import Wrapper from "../ui/Wrapper";
+
 const CoreLayout: React.FC = () => {
 
     const { theme } = useTheme();
 
-    return <ThemeProvider>
-        <div className={theme}>
+    return <div className={theme + ' flex-col screen-h-w'}>
             <Navbar />
-            <Outlet />
-        </div>
-    </ThemeProvider>
+            <Wrapper>
+                <Outlet />
+            </Wrapper>
+            <Footer />
+    </div>
 }
 
 export default CoreLayout;

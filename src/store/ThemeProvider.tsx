@@ -17,15 +17,27 @@ export const useTheme = (): ThemeContext => useContext(ThemeCtx);
 
 const ThemeProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
 
-    const [theme, setTheme] = useState<Theme>('light');
+    /*
+        -- FIX IT LATER --
+        Theme starts of with dark mode from cached theme in localstorage
+    */
+   
+    const { theme: themeCtx } = useTheme();
 
-    useEffect(() => {
-        console.log(theme);
-    }, [theme])
+    const [theme, setTheme] = useState<Theme>(themeCtx);
 
     const toggleTheme = () => {
         setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light')
     }
+
+    // const setCachedTheme: (theme: Theme) => void = (cachedTheme) => {
+    //     setTheme(cachedTheme);
+    // }
+
+    // useEffect(() => {
+    //     const cachedTheme = localStorage.getItem(theme) === 'light' ? 'light' : 'dark';
+    //     setCachedTheme(cachedTheme);
+    // },[])
 
     const themeValue: ThemeContext = {
         theme,
