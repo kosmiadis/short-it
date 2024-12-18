@@ -1,0 +1,18 @@
+@import url('../../../styles/variables.css');
+
+div.error_block {
+
+    display: flex;
+    align-items: center;
+    background-color: var(--error-block-bg-color);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+
+    & p.error_text {
+        margin: 0;
+        color: var(--error-text-color);
+    }
+
+}

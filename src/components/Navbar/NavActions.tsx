@@ -1,11 +1,24 @@
-import Group from "../ui/Group";
-import Button from "../ui/Button";
+import { useAuth } from "../../store/AuthProvider";
+import AuthActions from "./Actions/AuthActions";
+import UserActions from "./Actions/UserActions";
 
-const NavAction: React.FC = () => {
-    return <Group direction="row">
-        <Button>Login</Button>
-        <Button>Sign Up</Button>
-    </Group>
+const NavActions: React.FC<{id: string}> = ({ id }) => {
+
+    const { isAuthorized } = useAuth();
+
+    let content;
+
+    if (!isAuthorized) {
+        content = <AuthActions id='auth-actions'/>
+    }
+
+    if (isAuthorized) {
+        content = <UserActions id='user-actions'/>
+    }
+    
+    return <div id={id}>
+        {content}
+    </div>
 }
 
-export default NavAction;
+export default NavActions;

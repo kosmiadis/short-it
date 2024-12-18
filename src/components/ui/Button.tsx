@@ -1,7 +1,10 @@
 import { ReactNode } from "react";
 
-const Button: React.FC<{className?: string, onClick?: () => void, children : ReactNode}> = ({className, onClick, children}) => {
-    return <button onClick={onClick} className={"jost-text btn action-btn " + className}>{children}</button>
+type BtnType = 'action-btn' | 'danger-btn' | 'theme-btn' | 'learn-more-btn'
+type Type = 'submit' | 'button' | 'reset';
+
+const Button: React.FC<{id?: string, btnType: BtnType, type?: Type, className?: string, onClick?: () => void, disabled?: boolean, children : ReactNode}> = ({id, btnType, disabled, type, className, onClick, children}) => {
+    return <button type={type} id={id} onClick={onClick} className={"btn " + btnType + ' ' + className} disabled={disabled}>{children}</button>
 }
 
 export default Button;

@@ -1,0 +1,71 @@
+@import url('../../styles/variables.css');
+
+header {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    background-color: var(--main-bg-color);
+}
+
+#navigation { 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    #brand {
+        text-decoration: none;
+        
+        & h2 {
+            color: var(--text-color);
+            font-family: var(--main-font);
+            font-size: var(--text-lg);
+        }
+    }
+
+    & * a {
+        text-decoration: unset;
+    }
+
+    & ul {
+
+        list-style: none;
+        padding: 0;
+        display: none;
+        align-items: center;
+        gap: 8px;
+
+        @media screen and (min-width: 569px) {
+            display: flex;
+        }
+
+        & li {
+            font-family: var(--main-font);
+            word-spacing: -2px;
+            font-size: var(--text-sm);
+
+            & a {
+                color: var(--text-color);
+            }
+        }
+
+        
+    }
+}
+
+#nav-actions {
+    display: flex;
+
+    #auth-actions {
+        display: flex;
+        gap: 10px;
+    }
+
+    #user-actions {
+        margin-block: auto;
+        display: flex;
+    }
+}

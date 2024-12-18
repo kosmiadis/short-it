@@ -1,23 +1,57 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-   --main-font: "Jost", sans-serif;
+
+    --smartphone-screen: 569px;
+    --laptop-screen: 769px;
+    --desktop-screen: 1069px;
+    --tv-screen: 1400px;
+
+    --loading-sm: 20px;
+    --loading-md: 30px;
+    --loading-lg: 50px;
+
+    --main-font: "Jost", sans-serif;
+    --btn-text: 1.2rem;
+    --text-sm: 1rem;
+    --text-md: 1.5rem;
+    --text-lg: 2rem;
+    --text-xl: 2.5rem;
+
+    --error-text-color: rgb(255, 255, 255);
+    --error-block-bg-color: rgba(255, 0, 0, 0.5);
+
+    --action-btn-bg-color: #574AE2;
+    --action-btn-text-color: #FAF6F6;
+    --action-btn-bg-hover-color: #3c32af;
+
+    --danger-btn-bg-color: #eb443f;
+    --danger-btn-text-color: #FAF6F6;
+    --danger-btn-bg-hover-color: #bd302b;
+
+    --theme-btn-bg-hover-color: rgb(0,0,0,0.1);
 }
 
 .dark {
     --main-bg-color: #040914;
     --text-color: #FAF6F6;
-    --action-btn-bg-color: #574AE2;
-    --action-btn-text-color: #FAF6F6;
-    --action-btn-text-hover-color: #3c32af;
+
+    --learn-more-btn-text-color: var(--text-color);
+    --learn-more-btn-bg-color: rgb(255,255,255, 0.05);
+    --learn-more-btn-bg-hover-color: rgb(255,255,255, 0.1);
+
+    --theme-btn-bg-color: transparent;
 }
 
 .light {
     --main-bg-color: #FAF6F6;
     --text-color: #040914;
-    --action-btn-bg-color: #574AE2;
-    --action-btn-text-color: #FAF6F6;
-    --action-btn-text-hover-color: #3c32af;
+
+    --learn-more-btn-text-color: var(--text-color);
+    --learn-more-btn-bg-color: rgb(0,0,0, 0.05);
+    --learn-more-btn-bg-hover-color: rgb(0,0,0, 0.1);
+
+    --theme-btn-bg-color: transparent;
 }
 
 

@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
     const { theme, toggleTheme } = useTheme();
     
     return <footer className="flex">
-        <Button className='no-bg' onClick={toggleTheme}>{theme === 'light' ? <MdLightMode color='black' /> : <MdOutlineLightMode color='white' />}</Button>
+        <Button btnType='theme-btn' className="btn" onClick={toggleTheme}>{theme === 'light' ? <MdLightMode color='black' /> : <MdOutlineLightMode color='white' />}</Button>
     </footer>
 }
 

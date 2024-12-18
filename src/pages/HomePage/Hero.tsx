@@ -1,8 +1,8 @@
-const Hero: React.FC = () => {
-    return <section className="width-2-3">
-        <span className="jost-text text-sm no-margin">No1 URL Shortening Service</span>
-        <p className="jost-text text-lg no-margin">Easy & Fast Url Shortening!</p>
-    </section>
-}
+const Hero: React.FC<{id: string}> = ({id}) => {
+    return <div id={id}>
+        <span>#No1 URL Shortening Service</span>
+        <p>Easy & Fast Url Shortening!</p>
+    </div>
+};
 
 export default Hero;
