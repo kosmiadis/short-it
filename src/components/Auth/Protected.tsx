@@ -21,7 +21,7 @@ const Protected: React.FC<{children: ReactNode }> = ({children}) => {
 
     useEffect(() => {
          mutate();
-    }, [mutate])
+    }, [])
 
     if (isPending) {
         return <div className="protected_loading">
