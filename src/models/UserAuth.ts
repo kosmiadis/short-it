@@ -1,9 +1,12 @@
-export type AuthUser = {
-    fullName: string,
-    email: string, 
-    urls: string[],
-    created_at: string,
+export type AuthUserResponse = {
+    user: {
+        fullName: string,
+        email: string, 
+        urls: string[],
+        created_at: string,
+    },
+    message: string,
 } | {
-    isAuthenticated: boolean
+    user: null,
     message: string
 } | null

@@ -5,9 +5,12 @@ import InputArea from "../../components/ui/InputArea/InputArea";
 import Page from "../../components/ui/Page";
 import { FormEventHandler, useRef } from "react";
 import ErrorBlock from "../../components/ui/ErrorBlock/ErrorBlock";
+import { useNavigate } from "react-router-dom";
 
 
 const Login: React.FC = () => {
+
+    const navigate = useNavigate();
 
     const emailRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)
@@ -15,7 +18,7 @@ const Login: React.FC = () => {
     const { mutate, isPending, isError, error } = useMutation({
         mutationFn: login,
         onSuccess: () => {
-            
+            navigate('/dashboard');
         }
     });
 
@@ -42,6 +45,7 @@ const Login: React.FC = () => {
                 <InputArea inputRef={passwordRef} id="password" label="Password" type="password" />
                 <AuthFormActions isPending={isPending} />
             </form>
+            
         </Page.PageSection>
     </Page>
 }

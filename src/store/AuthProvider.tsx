@@ -1,11 +1,12 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from "react"
-import { AuthUser } from "../models/UserAuth";
+import { AuthUserResponse } from "../models/UserAuth";
 
 type AuthContext = {
     isAuthorized: boolean,
-    authUser: AuthUser | null
+    authUser: AuthUserResponse | null
     setIsAuthorized: Dispatch<SetStateAction<boolean>>;
-    setAuthUser: Dispatch<SetStateAction<AuthUser>>,
+    setAuthUser: Dispatch<SetStateAction<AuthUserResponse>>,
+
 }
 
 export const ThemeCtx = createContext<AuthContext>({
@@ -21,13 +22,14 @@ export const useAuth = () => useContext<AuthContext>(ThemeCtx);
 const AuthProvider: React.FC<{children: ReactNode }> = ({ children }) => {
 
     const [ isAuthorized, setIsAuthorized] = useState(false);
-    const [ authUser, setAuthUser ] = useState<AuthUser>(null);
+    const [ authUser, setAuthUser ] = useState<AuthUserResponse>(null);
 
     const authValue: AuthContext = {
         isAuthorized,
         authUser,
         setIsAuthorized,
         setAuthUser,
+       
     }
 
     return <ThemeCtx.Provider value={authValue}>

@@ -11,8 +11,6 @@ import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import { queryClient } from "./query/queryClient";
 
-
-
 const router = createBrowserRouter([
   {path: '/', element: <CoreLayout />, children: [
     {path: '', element: <HomePage />},
@@ -23,6 +21,10 @@ const router = createBrowserRouter([
 ])
 
 const App: React.FC = () => {
+  
+ 
+  
+
   return <>
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>

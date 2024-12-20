@@ -2,24 +2,32 @@ import { ReactNode, useEffect } from "react"
 import { useAuth } from "../../store/AuthProvider"
 import { Navigate } from "react-router-dom";
 import {  useMutation } from "@tanstack/react-query";
-import { AuthUser } from "../../models/UserAuth";
+import { AuthUserResponse } from "../../models/UserAuth";
 import LoadingIndicator from "../ui/LoadingIndicator/LoadingIndicator";
+import './Protected.css';
 
 const Protected: React.FC<{children: ReactNode }> = ({children}) => {
     
-    const { isAuthorized, authUser, setIsAuthorized, setAuthUser } = useAuth();
+    const { isAuthorized, setIsAuthorized, setAuthUser } = useAuth();
 
     const { mutate, isPending, isError } = useMutation({
-        mutationFn: checkAuth
+        mutationFn: checkAuth,
+        onSuccess: (response) => {
+    
+            setIsAuthorized(true);
+            setAuthUser({user: response!.user, message: response!.message})
+        }
     })
 
     useEffect(() => {
-        mutate();
-
-    }, [])
+         mutate();
+    }, [mutate])
 
     if (isPending) {
-        return <div><LoadingIndicator size="large"/></div>
+        return <div className="protected_loading">
+            <LoadingIndicator size="large"/>
+            <span id='loading_sub_text'>Loading...</span>
+        </div>
     }
 
     //TODO ***
@@ -28,18 +36,19 @@ const Protected: React.FC<{children: ReactNode }> = ({children}) => {
        return <Navigate to='/' />
     }
 
-    if (!isAuthorized) {
+    if (!isAuthorized && !isPending) {
+        {console.log('it run')}
        return <Navigate to='/login' />
     }
     
-    if (isAuthorized) {
+    if (isAuthorized && !isPending) {
         return <>
             {children}
         </>
     }    
 }
 
-const checkAuth = async (): Promise<AuthUser>  => {
+export const checkAuth = async (): Promise<AuthUserResponse>  => {
     const req = await fetch('http://localhost:3000/auth/me', {
         method: "GET",
         credentials: 'include',

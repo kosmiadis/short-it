@@ -12,7 +12,10 @@
 div.loading_indicator {
     border-radius: 50%;
     animation: loading 1s linear infinite;
-    border-top: 2px dotted var(--action-btn-text-color);
+    border-top: 2px solid var(--text-color);
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 div.loading_indicator.small {
