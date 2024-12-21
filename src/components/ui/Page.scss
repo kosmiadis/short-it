@@ -1,16 +1,15 @@
 @import url('../../styles/variables.scss');
 
 .page {
+    max-width: 1400px;
+    margin-inline: auto;
     padding: 1rem;
+
     @media screen and (min-width: 769px) {
         padding: 1.5rem;
     }
+    
     & h2.page_title {
-
-        &::before {
-            content: '*'
-        }
-
         width: min-content;
         text-wrap: nowrap;
         border-bottom: 2px solid var(--text-color);

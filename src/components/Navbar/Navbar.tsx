@@ -9,7 +9,7 @@ import { useEffect } from "react";
 const Navbar: React.FC = () => {
   const { setIsAuthorized, setAuthUser } = useAuth();
 
-  const { mutate, isPending, isError } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: checkAuth,
     onSuccess: (response) => {
         setIsAuthorized(true);

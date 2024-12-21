@@ -16,15 +16,12 @@ const router = createBrowserRouter([
     {path: '', element: <HomePage />},
     {path: 'dashboard', element: <Protected><Dashboard /></Protected>},
     {path: 'login', element: <Login />},
-    {path: 'sign-up', element: <Signup />},
+    {path: 'signup', element: <Signup />},
   ], errorElement: <CoreErrorPage />}
 ])
 
 const App: React.FC = () => {
   
- 
-  
-
   return <>
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>

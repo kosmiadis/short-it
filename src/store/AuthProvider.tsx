@@ -1,12 +1,11 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useState } from "react"
-import { AuthUserResponse } from "../models/UserAuth";
+import { UserAuthResponse } from "../types/UserAuthResponse";
 
 type AuthContext = {
     isAuthorized: boolean,
-    authUser: AuthUserResponse | null
+    authUser: UserAuthResponse | null
     setIsAuthorized: Dispatch<SetStateAction<boolean>>;
-    setAuthUser: Dispatch<SetStateAction<AuthUserResponse>>,
-
+    setAuthUser: Dispatch<SetStateAction<UserAuthResponse>>,
 }
 
 export const ThemeCtx = createContext<AuthContext>({
@@ -22,7 +21,8 @@ export const useAuth = () => useContext<AuthContext>(ThemeCtx);
 const AuthProvider: React.FC<{children: ReactNode }> = ({ children }) => {
 
     const [ isAuthorized, setIsAuthorized] = useState(false);
-    const [ authUser, setAuthUser ] = useState<AuthUserResponse>(null);
+    const [ authUser, setAuthUser ] = useState<UserAuthResponse>(null);
+
 
     const authValue: AuthContext = {
         isAuthorized,

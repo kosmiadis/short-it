@@ -20,6 +20,7 @@ const HomePage: React.FC = () => {
         </Page.PageSection>
 
         <Page.PageSection id='features' sectionTitle='Features' >
+            
         </Page.PageSection>
 
         <Page.PageSection id='how-it-works' sectionTitle='How It Works' >

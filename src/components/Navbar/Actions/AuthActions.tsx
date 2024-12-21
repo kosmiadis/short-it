@@ -10,7 +10,7 @@ const AuthActions: React.FC<{id: string}> = ({id}) => {
     }
 
     const handleSignup = ()=> {
-        navigate('/sign-up');
+        navigate('/signup');
     }
 
     return <div id={id}>

@@ -1,11 +1,12 @@
 import { MutationFunction, useMutation } from "@tanstack/react-query";
-import { AuthResponse } from "../../models/AuthResponse";
+import { AuthResponse } from "../../types/AuthResponse";
 import AuthFormActions from "../../components/Auth/AuthFormActions";
 import InputArea from "../../components/ui/InputArea/InputArea";
 import Page from "../../components/ui/Page";
 import { FormEventHandler, useRef } from "react";
 import ErrorBlock from "../../components/ui/ErrorBlock/ErrorBlock";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useAuth } from "../../store/AuthProvider";
 
 
 const Login: React.FC = () => {
@@ -15,11 +16,15 @@ const Login: React.FC = () => {
     const emailRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)
 
+    const { authUser, isAuthorized, setIsAuthorized, setAuthUser} = useAuth();
+
     const { mutate, isPending, isError, error } = useMutation({
         mutationFn: login,
-        onSuccess: () => {
+        onSuccess: (response) => {
+            setIsAuthorized(true);
+            setAuthUser({ user: response!.user, message: response!.message })
             navigate('/dashboard');
-        }
+        },
     });
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
@@ -36,16 +41,22 @@ const Login: React.FC = () => {
         }
     }
 
-    return <Page id='login_page' pageTitle="Login to Existing Account">
+
+
+    if (authUser) {
+        return <Navigate to='/dashboard' />
+    }
+
+    return <Page id='login_page'>
         <Page.PageSection>
             
             <form onSubmit={handleSubmit} className="auth_form">
+                <h2>Login</h2>
                 {isError && <ErrorBlock text={error.message || 'Something went wrong!'}/>}
                 <InputArea inputRef={emailRef} id="email" label="Email" />
                 <InputArea inputRef={passwordRef} id="password" label="Password" type="password" />
-                <AuthFormActions isPending={isPending} />
+                <AuthFormActions formType='login' isPending={isPending} />
             </form>
-            
         </Page.PageSection>
     </Page>
 }

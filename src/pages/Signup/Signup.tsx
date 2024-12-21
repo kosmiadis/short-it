@@ -2,7 +2,7 @@ import InputArea from "../../components/ui/InputArea/InputArea";
 import Page from "../../components/ui/Page";
 import AuthFormActions from "../../components/Auth/AuthFormActions";
 import { MutationFunction, useMutation } from "@tanstack/react-query";
-import { AuthResponse } from "../../models/AuthResponse";
+import { AuthResponse } from "../../types/AuthResponse";
 import { FormEventHandler, useRef } from "react";
 import ErrorBlock from "../../components/ui/ErrorBlock/ErrorBlock";
 
@@ -32,14 +32,15 @@ const Signup: React.FC = () => {
             }
     }
 
-    return <Page id='signup_page' pageTitle="Create an Account">
+    return <Page id='signup_page'>
         <Page.PageSection>
             <form onSubmit={handleSubmit} className="auth_form">
-            {isError && <ErrorBlock text={error.message || 'Something went wrong!'}/>}
+                <h2>Signup</h2>
+                {isError && <ErrorBlock text={error.message || 'Something went wrong!'}/>}
                 <InputArea inputRef={fullNameRef} id='fullName' label="Full Name"/>
                 <InputArea inputRef={emailRef} id="email" type="email" label="Email"/>
                 <InputArea inputRef={passwordRef} id="password" type="password" label="Password"/>
-                <AuthFormActions isPending={isPending}/>
+                <AuthFormActions formType='signup' isPending={isPending}/>
             </form>
         </Page.PageSection>
     </Page>

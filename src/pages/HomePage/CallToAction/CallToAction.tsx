@@ -13,7 +13,7 @@ const CallToAction: React.FC<{id: string}> = ({ id }) => {
         <p>Start Shortening URL's!</p>
         <div id='cta-actions'>
             <Button onClick={handleGetStarted} btnType='action-btn'>Get Started</Button>
-            <a href='#how-it-works'><Button btnType="learn-more-btn">Learn More</Button></a>
+            <Button btnType="learn-more-btn">Learn More</Button>
         </div>
     </div>
 }
