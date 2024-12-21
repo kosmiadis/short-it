@@ -21,7 +21,7 @@ const router = createBrowserRouter([
 ])
 
 const App: React.FC = () => {
-  
+
   return <>
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
