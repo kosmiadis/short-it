@@ -18,10 +18,12 @@
     --text-lg: 2rem;
     --text-xl: 2.5rem;
 
+    --accent-color:#574AE2; 
+
     --error-text-color: rgb(255, 255, 255);
     --error-block-bg-color: rgba(255, 0, 0, 0.5);
 
-    --action-btn-bg-color: #574AE2;
+    --action-btn-bg-color: var(--accent-color);
     --action-btn-text-color: #FAF6F6;
     --action-btn-bg-hover-color: #3c32af;
 
@@ -29,7 +31,10 @@
     --danger-btn-text-color: #FAF6F6;
     --danger-btn-bg-hover-color: #bd302b;
 
-    --theme-btn-bg-hover-color: rgb(0,0,0,0.1);
+    --theme-btn-bg-hover-color: rgb(0,0,0,0.1);;
+
+    
+    
 }
 
 .dark {
@@ -41,6 +46,8 @@
     --learn-more-btn-bg-hover-color: rgb(255,255,255, 0.1);
 
     --theme-btn-bg-color: transparent;
+
+    --secondary-font-color: rgb(255,255,255,0.5);
 }
 
 .light {
@@ -52,6 +59,8 @@
     --learn-more-btn-bg-hover-color: rgb(0,0,0, 0.1);
 
     --theme-btn-bg-color: transparent;
+
+    --secondary-font-color: rgb(0,0,0,0.4);
 }
 
 

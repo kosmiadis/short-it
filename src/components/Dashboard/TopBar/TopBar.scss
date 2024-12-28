@@ -1,6 +1,32 @@
+@import url('../../../styles/variables.css');
+
 div.top_bar {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+
+    @media screen and (min-width: 569px) {
+        flex-direction: row;
+    }
+
     align-items: center;
     justify-content: space-between;
+
+    p.welcome_message {
+        margin-inline: auto;
+        min-width: min-content;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        
+        @media screen and (min-width: 569px) {
+            margin: unset;
+            font-size: 1.2rem;
+        }
+
+        span#auth_user_email {
+            font-weight: 600;
+            font-style: italic;
+        }
+    }
 }

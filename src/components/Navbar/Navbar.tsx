@@ -2,7 +2,7 @@ import Navigation from "./Navigation";
 import NavActions from "./NavActions";
 import './Navbar.css';
 import { useMutation } from "@tanstack/react-query";
-import { checkAuth } from "../Auth/Protected";
+import { checkAuth } from "../Auth/Protected/Protected";
 import { useAuth } from "../../store/AuthProvider";
 import { useEffect } from "react";
 

@@ -1,0 +1,48 @@
+@import url('../../../styles/variables.css');
+
+.page {
+    max-width: 1400px;
+    margin-inline: auto;
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+        
+    @media screen and (min-width: 769px) {
+        padding: 1.5rem;
+    }
+    
+    & h2.page_title {
+        width: min-content;
+        text-wrap: nowrap;
+        border-bottom: 2px solid var(--text-color);
+    }
+}
+
+.page_section {
+    
+    &.bordered {
+        border: 2px dashed var(--accent-color);
+    }
+
+    border-radius: 16px;
+    padding: 1rem;
+
+    & h2 {
+        font-size: var(--text-md);
+        text-align: center;
+
+    }
+    width: 100%;
+    max-width: 1400px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (min-width: 696px) {
+        & h2 {
+            text-align: left;
+        }
+    }
+}

@@ -1,0 +1,27 @@
+@import url('../../styles/variables.css');
+
+#dashboard_page {
+
+    .view_all {
+        color: var(--text-color);
+        text-decoration-line: underline;
+        width: min-content;
+        text-wrap: nowrap;
+    }
+
+    div.dashboard_secondary_wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        @media screen and (min-width: 1069px) {
+            flex-direction: row;
+            height: 220px;
+            gap: rem;
+        }
+        justify-content: flex-start;
+
+        & .page_section {
+            min-height: 100%;
+        }
+    }
+}

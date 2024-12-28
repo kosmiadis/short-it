@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
-import Button from "../../components/ui/Button";
+import Button from "../../components/ui/Button/Button";
 import { useTheme } from "../../store/ThemeProvider";
 import './CoreErrorPage.css';
 

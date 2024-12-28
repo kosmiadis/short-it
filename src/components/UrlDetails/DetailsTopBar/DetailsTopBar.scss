@@ -1,0 +1,57 @@
+@import url('../../../styles/variables.css');
+
+div.details_top_bar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    
+
+    @media screen and (min-width: 569px) {
+        justify-content: space-between;
+    }
+
+    div.quick_info {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        align-items: flex-start;
+
+        a {
+        
+            font-size: var(--text-md);
+            text-decoration: unset;
+            color: var(--text-color);
+
+            img {
+                margin-left: 4px;
+            }
+
+            &:hover {
+                cursor: pointer;
+                text-decoration: underline 2px var(--accent-color);
+            }
+        
+        }
+
+        & span {
+            margin-top: 2.5px;
+            font-size: 1.25rem;
+            
+            &#active {
+                color: var(--accent-color);
+            }
+
+            &#inactive {
+                color: rgb(255, 70, 70);
+            }
+        }
+    }
+
+    div.url_actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+}

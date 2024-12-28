@@ -1,0 +1,69 @@
+@import url('../../../styles/variables.css');
+
+li {
+    width: 100%;
+    border: 1px solid var(--secondary-font-color);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    transition: 0.05s ease-in-out;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.02);
+    }
+
+    div.top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        div.shortened_ulr_display {
+
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            
+
+            span.copy_url {
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            span.copied {
+                color: var(--accent-color);
+                font-weight: 500;
+            }
+
+            span.shortened_url {
+                color: var(--text-color);
+
+                &:hover {
+                    text-decoration-color: var(--accent-color);
+                    text-decoration-line: underline;
+                    text-decoration-thickness: 2px;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    
+
+    span.original_url {
+        color: var(--secondary-font-color);
+        display: block;
+        margin-block: auto;
+    }    
+
+    span.created_at {
+        color: var(--secondary-font-color);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+}

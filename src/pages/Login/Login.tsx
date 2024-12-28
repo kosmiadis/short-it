@@ -1,12 +1,13 @@
 import { MutationFunction, useMutation } from "@tanstack/react-query";
 import { AuthResponse } from "../../types/AuthResponse";
-import AuthFormActions from "../../components/Auth/AuthFormActions";
+import AuthFormActions from "../../components/Auth/AuthFormActions/AuthFormActions";
 import InputArea from "../../components/ui/InputArea/InputArea";
-import Page from "../../components/ui/Page";
+import Page from "../../components/ui/Page/Page";
 import { FormEventHandler, useRef } from "react";
 import ErrorBlock from "../../components/ui/ErrorBlock/ErrorBlock";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/AuthProvider";
+import { UserAuthResponse } from "../../types/UserAuthResponse";
 
 
 const Login: React.FC = () => {
@@ -16,7 +17,7 @@ const Login: React.FC = () => {
     const emailRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)
 
-    const { authUser, isAuthorized, setIsAuthorized, setAuthUser} = useAuth();
+    const { authUser, setIsAuthorized, setAuthUser} = useAuth();
 
     const { mutate, isPending, isError, error } = useMutation({
         mutationFn: login,
@@ -41,8 +42,6 @@ const Login: React.FC = () => {
         }
     }
 
-
-
     if (authUser) {
         return <Navigate to='/dashboard' />
     }
@@ -61,7 +60,7 @@ const Login: React.FC = () => {
     </Page>
 }
 
-const login: MutationFunction<AuthResponse, {email: string, password: string}> = async ({email, password})  => {
+const login: MutationFunction<UserAuthResponse, {email: string, password: string}> = async ({email, password})  => {
     const req = await fetch('http://localhost:3000/auth/login', {
         method: "POST",
         credentials: 'include',

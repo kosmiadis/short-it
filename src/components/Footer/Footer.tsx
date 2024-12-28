@@ -1,5 +1,5 @@
 import { useTheme } from "../../store/ThemeProvider";
-import Button from "../ui/Button";
+import Button from "../ui/Button/Button";
 import { MdLightMode } from "react-icons/md";
 import { MdOutlineLightMode } from "react-icons/md";
 

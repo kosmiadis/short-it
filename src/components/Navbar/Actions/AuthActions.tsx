@@ -1,4 +1,4 @@
-import Button from "../../ui/Button";
+import Button from "../../ui/Button/Button";
 import { useNavigate } from "react-router-dom";
 
 const AuthActions: React.FC<{id: string}> = ({id}) => {

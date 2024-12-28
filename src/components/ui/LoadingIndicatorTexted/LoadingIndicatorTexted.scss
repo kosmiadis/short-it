@@ -1,17 +1,19 @@
-@import url('../../styles/variables.css');
+@import url('../../../styles/variables.css');
 
-.protected_loading {
+
+div.loading_indicator_texted {
     position: absolute;
     top: 40%;
-    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    #loading_sub_text {
+    span {
         margin-top: 5px;
-        font-size: 1.3rem;
+        font-size: var(--text-md);
 
         &::selection {
             background-color: unset;

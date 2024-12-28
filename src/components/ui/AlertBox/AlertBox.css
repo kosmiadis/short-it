@@ -1,0 +1,1 @@
+@import"../../../styles/variables.css";div.alert_box{display:flex;flex-direction:row;gap:5px;background-color:var(--action-btn-bg-color);align-items:flex-start;padding:1rem 2rem}div.alert_box *{margin:0}div.alert_box h3,div.alert_box p{font-family:var(--main-font)}div.alert_box h3{font-weight:500}div.alert_box p{font-weight:300;font-size:var(--text-sm);margin-top:8px}

@@ -1,4 +1,4 @@
-import Page from "../../components/ui/Page";
+import Page from "../../components/ui/Page/Page";
 import CallToAction from "./CallToAction/CallToAction";
 import Hero from "./Hero";
 import './HomePage.css';
@@ -6,7 +6,6 @@ import globeImg from '../../assets/globe.png';
 import { motion } from "motion/react";
 
 const HomePage: React.FC = () => {
-
 
     return <Page id='homepage'>
         <Page.PageSection id='hero-section'>

@@ -1,5 +1,5 @@
-import Button from "../ui/Button"
-import LoadingIndicator from "../ui/LoadingIndicator/LoadingIndicator";
+import Button from "../../ui/Button/Button"
+import LoadingIndicator from "../../ui/LoadingIndicator/LoadingIndicator";
 
 type FormType = 'login' | 'signup'
 

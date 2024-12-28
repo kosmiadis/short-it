@@ -1,19 +1,24 @@
 import InputArea from "../../components/ui/InputArea/InputArea";
-import Page from "../../components/ui/Page";
-import AuthFormActions from "../../components/Auth/AuthFormActions";
+import Page from "../../components/ui/Page/Page";
+import AuthFormActions from "../../components/Auth/AuthFormActions/AuthFormActions";
 import { MutationFunction, useMutation } from "@tanstack/react-query";
 import { AuthResponse } from "../../types/AuthResponse";
 import { FormEventHandler, useRef } from "react";
 import ErrorBlock from "../../components/ui/ErrorBlock/ErrorBlock";
+import { useNavigate } from "react-router-dom";
 
 const Signup: React.FC = () => {
 
     const fullNameRef = useRef<HTMLInputElement>(null)
     const emailRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)
+    const navigate = useNavigate();
 
     const { mutate, isPending, isError, error } = useMutation({
         mutationFn: signup,
+        onSuccess: () => {
+            navigate('/dashboard');
+        }
     });
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {

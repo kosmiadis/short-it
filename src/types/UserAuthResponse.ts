@@ -1,8 +1,10 @@
+import { Url } from "./Url"
+
 export type UserAuthResponse = {
     user: {
         fullName: string,
         email: string, 
-        urls: string[],
+        urls: Url[],
         created_at: string,
     },
     message: string,

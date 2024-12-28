@@ -1,16 +1,13 @@
 import { useAuth } from "../../../store/AuthProvider"
 import './TopBar.css';
+import userProfileImage from '../../../assets/user.png';
 
-type Props = {
-    title: string,
-}
-
-export default function TopBar ({ title }: Props) {
+export default function TopBar () {
 
     const { authUser } = useAuth();
 
     return <div className="top_bar">
-            <h2>{title}</h2>
-            {authUser && <span>{authUser.message}</span>}
+            <h2>Dashboard</h2>
+            {authUser && <p className="welcome_message"><span id="auth_user_email">{authUser.message}</span><img className="icon icon-sm" src={userProfileImage}/></p>}
     </div>
 }
