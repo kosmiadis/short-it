@@ -2,7 +2,11 @@ import { useAuth } from "../../store/AuthProvider";
 import AuthActions from "./Actions/AuthActions";
 import UserActions from "./Actions/UserActions";
 
-const NavActions: React.FC<{id: string}> = ({ id }) => {
+type NavActionsProps = {
+    id: string
+}
+
+export default function NavActions ({ id }: NavActionsProps) {
 
     const { isAuthorized } = useAuth();
 
@@ -20,5 +24,3 @@ const NavActions: React.FC<{id: string}> = ({ id }) => {
         {content}
     </div>
 }
-
-export default NavActions;

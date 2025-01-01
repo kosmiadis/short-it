@@ -1,0 +1,31 @@
+@import url('../../../../styles/variables.css');
+
+.dark {
+    --background-color: rgb(255,255,255,0.4);
+    --background-hover-color: rgb(255,255,255,0.5);
+
+}
+
+.light {
+    --background-color: rgb(0,0,0,0.05);
+    --background-hover-color: rgb(0,0,0,0.14);
+}
+
+button.tab_btn {
+    border: unset;
+    outline: unset;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    padding: 10px;
+    color: var(--text-color);
+    background-color: var(--background-color);
+
+    &:hover {
+        cursor: pointer;
+        background-color: var(--background-hover-color);
+    }
+
+    &.active {
+        background-color: var(--background-hover-color);
+    }
+}

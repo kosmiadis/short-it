@@ -1,12 +1,12 @@
 import Navigation from "./Navigation";
 import NavActions from "./NavActions";
-import './Navbar.css';
 import { useMutation } from "@tanstack/react-query";
 import { checkAuth } from "../Auth/Protected/Protected";
 import { useAuth } from "../../store/AuthProvider";
 import { useEffect } from "react";
+import './Navbar.css';
 
-const Navbar: React.FC = () => {
+export default function Navbar () {
   const { setIsAuthorized, setAuthUser } = useAuth();
 
   const { mutate } = useMutation({
@@ -26,5 +26,3 @@ const Navbar: React.FC = () => {
     <NavActions id='nav-actions'/>
   </header>
 }
-
-export default Navbar;

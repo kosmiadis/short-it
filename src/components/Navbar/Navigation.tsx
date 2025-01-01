@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import Logo from "./Logo/Logo";
 
-const Navigation: React.FC<{id: string}> = ({ id }) => {
+type NavigationProps = { id: string } 
 
-    return <nav id={id} className="flex">
-      <Link to='/' id='brand'><h2>Short-It</h2></Link></nav>
-}
-
-export default Navigation;
+export default function Navigation ({id}: NavigationProps) {
+  return <nav id={id}>
+      <Logo id="brand">
+        Short-It
+      </Logo>
+    </nav>
+};

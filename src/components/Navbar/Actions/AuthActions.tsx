@@ -1,7 +1,9 @@
 import Button from "../../ui/Button/Button";
 import { useNavigate } from "react-router-dom";
 
-const AuthActions: React.FC<{id: string}> = ({id}) => {
+type AuthActionsProps = { id: string }
+
+export default function AuthActions ({id}: AuthActionsProps)  {
     
     const navigate = useNavigate();
 
@@ -18,5 +20,3 @@ const AuthActions: React.FC<{id: string}> = ({id}) => {
         <Button onClick={handleSignup} btnType="action-btn">Sign Up</Button>
     </div>
 }
-
-export default AuthActions;

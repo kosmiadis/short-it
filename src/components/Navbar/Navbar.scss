@@ -17,14 +17,11 @@ header {
     align-items: center;
     gap: 10px;
 
-    #brand {
+    h2#brand {
         text-decoration: none;
-        
-        & h2 {
-            color: var(--text-color);
-            font-family: var(--main-font);
-            font-size: var(--text-lg);
-        }
+        color: var(--text-color);
+        font-family: var(--main-font);
+        font-size: var(--text-md);
     }
 
     & * a {

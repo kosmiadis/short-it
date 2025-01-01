@@ -4,6 +4,7 @@ import UrlDetails from "../../components/UrlDetails/UrlDetails";
 import LoadingIndicatorTexted from "../../components/ui/LoadingIndicatorTexted/LoadingIndicatorTexted";
 import './UrlDetailsPage.css';
 import { Url } from "../../types/Url";
+import AnalyticsTabs from "../../components/UrlDetails/AnalyticsTabs/AnalyticsTabs";
 
 export default function UrlDetailsPage () {
     const params = useParams();
@@ -30,7 +31,7 @@ export default function UrlDetailsPage () {
         </Page.PageSection>
 
         <Page.PageSection sectionTitle="Analytics">
-
+            <AnalyticsTabs />
         </Page.PageSection>
         </>}
     </Page>
