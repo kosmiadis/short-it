@@ -1,33 +1,36 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Page from "../../components/ui/Page/Page";
 import UrlDetails from "../../components/UrlDetails/UrlDetails";
 import LoadingIndicatorTexted from "../../components/ui/LoadingIndicatorTexted/LoadingIndicatorTexted";
 import './UrlDetailsPage.css';
-import { Url } from "../../types/Url";
 import AnalyticsTabs from "../../components/UrlDetails/AnalyticsTabs/AnalyticsTabs";
+import { useQuery } from "@tanstack/react-query";
+import { GetUrlResponse } from "../../types/GetUrlResponse";
+import Button from "../../components/ui/Button/Button";
 
 export default function UrlDetailsPage () {
     const params = useParams();
-    const isPending = false;
+    const navigate = useNavigate();
 
-    const url: Url = {
-        _id: 'asdf09239002adslkf',
-        original_url: 'https://google.com', 
-        shortened_url: 'https://short-it/ks92s',
-        created_by: '69asdlfka9223892asldsfk@',
-        status: 'inactive',
-        created_at: '23/12/2024'
+    const { data, isPending, isError } = useQuery({
+        queryKey: ['urls', params.urlId!],
+        queryFn: () => loadUrl({url_id: params.urlId!}),
+    })
+
+    function handleDashboardNavigation () {
+        navigate('/dashboard');
     }
-
-    // useEffect(() => {
-    //     // mutate() send a request to get info about url
-        //extract the url id from the params
-    // })
 
     return <Page>
         {isPending && <LoadingIndicatorTexted size="large" loadingText="Loading Url..."/>}
-        {!isPending && <><Page.PageSection sectionTitle="UrlDetails">
-            <UrlDetails url={url} />
+        
+        {isError && <Page.PageSection sectionTitle="An Error Occured!">
+            <p>Something went wrong! Please try again later.</p>
+            <Button onClick={handleDashboardNavigation} btnType="action-btn">Go to Dashboard</Button>
+        </Page.PageSection>}
+        
+        {data?.url && <><Page.PageSection sectionTitle="UrlDetails">
+            <UrlDetails url={data.url} />
         </Page.PageSection>
 
         <Page.PageSection sectionTitle="Analytics">
@@ -36,3 +39,16 @@ export default function UrlDetailsPage () {
         </>}
     </Page>
 }
+
+export async function loadUrl ({url_id}: {url_id: string}): Promise<GetUrlResponse> {
+    const req = await fetch('http://localhost:3000/url/'+url_id , {
+        method: "GET",
+        credentials: 'include',
+    });
+    
+    if (!req.ok) {
+        throw await req.json();
+    }
+    return await req.json();
+}
+

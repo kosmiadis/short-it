@@ -7,7 +7,7 @@ import { FormEventHandler, useRef } from "react";
 import ErrorBlock from "../../components/ui/ErrorBlock/ErrorBlock";
 import { useNavigate } from "react-router-dom";
 
-const Signup: React.FC = () => {
+export default function Signup () {
 
     const fullNameRef = useRef<HTMLInputElement>(null)
     const emailRef = useRef<HTMLInputElement>(null)
@@ -62,8 +62,4 @@ const signup: MutationFunction<AuthResponse, {fullName: string, email: string, p
         throw await req.json();
     }
     return await req.json();
-}
-
-
-
-export default Signup;
+};

@@ -1,5 +1,4 @@
 import { MutationFunction, useMutation } from "@tanstack/react-query";
-import { AuthResponse } from "../../types/AuthResponse";
 import AuthFormActions from "../../components/Auth/AuthFormActions/AuthFormActions";
 import InputArea from "../../components/ui/InputArea/InputArea";
 import Page from "../../components/ui/Page/Page";
@@ -10,7 +9,7 @@ import { useAuth } from "../../store/AuthProvider";
 import { UserAuthResponse } from "../../types/UserAuthResponse";
 
 
-const Login: React.FC = () => {
+export default function Login () {
 
     const navigate = useNavigate();
 
@@ -72,5 +71,3 @@ const login: MutationFunction<UserAuthResponse, {email: string, password: string
     }
     return await req.json();
 }
-
-export default Login;

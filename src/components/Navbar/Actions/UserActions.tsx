@@ -5,8 +5,13 @@ import { logout } from "../../Auth/Protected/Protected";
 import { useAuth } from "../../../store/AuthProvider";
 import AlertBox from "../../ui/AlertBox/AlertBox";
 import { useState } from "react";
+import { queryClient } from "../../../query/queryClient";
 
-const UserActions: React.FC<{id: string}> = ({ id }) => {
+type UserActionsProps = {
+    id: string
+}
+
+export default function UserActions ({ id }: UserActionsProps)  {
     const navigate = useNavigate()
 
     const [showAlert, setShowAlert] = useState(false);
@@ -17,6 +22,7 @@ const UserActions: React.FC<{id: string}> = ({ id }) => {
             setShowAlert(true);
         },
         onSuccess: () => {
+            queryClient.clear();
             setShowAlert(false);
             clearAuth();
             navigate('/');
@@ -47,6 +53,4 @@ const UserActions: React.FC<{id: string}> = ({ id }) => {
             <AlertBox type={isPending ? 'pending' : isError ? 'error': 'success'} title="Logout Failed" text={error?.message || 'Something went wrong!'}/>        
         }
     </div>
-}
-
-export default UserActions;
+};

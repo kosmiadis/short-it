@@ -12,3 +12,4 @@ export default function UrlDetails ({ url }: UrlDetailsProps) {
         <DetailsBody url={url}/>
     </div>
 }
+

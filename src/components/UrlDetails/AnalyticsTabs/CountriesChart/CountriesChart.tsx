@@ -1,5 +1,5 @@
 import ChartData from "../../../../types/ChartData"
-import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
 type CountriesChartProps = {
     data: ChartData[]
@@ -12,7 +12,6 @@ export default function CountriesChart ({ data }: CountriesChartProps) {
         <BarChart data={data} margin={{top: 30}}>
             <XAxis dataKey="name" />
             <YAxis />
-            <Tooltip />
             <Bar dataKey="y" fill="#574ae2" />
         </BarChart>
     </ResponsiveContainer>

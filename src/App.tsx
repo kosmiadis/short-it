@@ -13,6 +13,7 @@ import { queryClient } from "./query/queryClient";
 import Urls from "./pages/Urls/Urls";
 import UrlsPageLayout from "./components/layouts/UrlsPageLayout/UrlsPageLayout";
 import UrlDetailsPage from "./pages/UrlDetailsPage/UrlDetailsPage";
+import UrlsLoaderProvider from "./store/UrlsLoaderProvided";
 
 const router = createBrowserRouter([
   {path: '/', element: <CoreLayout />, children: [
@@ -33,7 +34,9 @@ const App: React.FC = () => {
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <RouterProvider router={router} />
+        <UrlsLoaderProvider>
+          <RouterProvider router={router} />
+        </UrlsLoaderProvider>
       </AuthProvider>
       </QueryClientProvider>
     </ThemeProvider>

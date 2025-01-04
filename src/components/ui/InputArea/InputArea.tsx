@@ -3,7 +3,7 @@ import './InputArea.css';
 
 type InitialValue = string | number | undefined;
 
-const InputArea: React.FC<{inputRef?: RefObject<HTMLInputElement>, id: string, label?: string, type?: string, initialValue?: InitialValue, placeholder?: string }> = ({
+const InputArea: React.FC<{inputRef?: RefObject<HTMLInputElement>, id: string, label?: string, type?: string, initialValue?: InitialValue, placeholder?: string, }> = ({
     inputRef,
     id, 
     label,

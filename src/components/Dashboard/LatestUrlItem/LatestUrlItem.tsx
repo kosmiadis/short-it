@@ -15,7 +15,7 @@ export default function LatestUrlItem ({ urlItem }: UrlItemProps) {
     const [isCopied, setIsCopied] = useState(false);
 
     const handleCopy = () => {
-        navigator.clipboard.writeText(urlItem.shortened_url)
+        navigator.clipboard.writeText('http://localhost:3000/'+urlItem.shortened_url)
         .then(() => {
             setIsCopied(true)
         })
@@ -28,9 +28,9 @@ export default function LatestUrlItem ({ urlItem }: UrlItemProps) {
     return <li>
             <div className="top">
                 <div className="shortened_ulr_display">
-                <a href={urlItem.shortened_url} target="_blank">
+                <a href={'http://localhost:3000/'+urlItem.shortened_url} target="_blank">
                 <span className='shortened_url'>
-                    {urlItem.shortened_url.split('//')[1]}
+                    short-it/{urlItem.shortened_url}
                 </span></a>
                 <span onClick={handleCopy} className={`copy_url ${isCopied ? 'copied' : undefined}`}>{isCopied ? 'Copied' : 'Copy'}</span>
 
