@@ -58,6 +58,10 @@ li {
         color: var(--secondary-font-color);
         display: block;
         margin-block: auto;
+        max-width: 200px;
+        overflow: hidden;
+        text-wrap: nowrap;
+        text-overflow: ellipsis;
     }    
 
     span.created_at {

@@ -14,7 +14,7 @@ export default function Signup () {
     const passwordRef = useRef<HTMLInputElement>(null)
     const navigate = useNavigate();
 
-    const { mutate, isPending, isError, error } = useMutation({
+    const {  mutate, isPending, isError, error } = useMutation({
         mutationFn: signup,
         onSuccess: () => {
             navigate('/dashboard');
@@ -41,7 +41,7 @@ export default function Signup () {
         <Page.PageSection>
             <form onSubmit={handleSubmit} className="auth_form">
                 <h2>Signup</h2>
-                {isError && <ErrorBlock text={error.message || 'Something went wrong!'}/>}
+                {isError && <ErrorBlock text={error?.message || 'Something went wrong!'}/>}
                 <InputArea inputRef={fullNameRef} id='fullName' label="Full Name"/>
                 <InputArea inputRef={emailRef} id="email" type="email" label="Email"/>
                 <InputArea inputRef={passwordRef} id="password" type="password" label="Password"/>
@@ -52,14 +52,21 @@ export default function Signup () {
 }
 
 const signup: MutationFunction<AuthResponse, {fullName: string, email: string, password: string}> = async ({fullName, email, password})  => {
-    const req = await fetch('http://localhost:3000/auth/signup', {
-        method: "POST",
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fullName, email, password }),
-    });
-    if (!req.ok) {
-        throw await req.json();
+    try {
+        const req = await fetch('http://localhost:3000/auth/signup', {
+            method: "POST",
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ fullName, email, password }),
+        });
+        if (!req.ok) {
+            throw await req.json();
+        }
+        return await req.json();    
+    } catch (e) {
+        if (e.message === 'User already exists!') {
+            throw new Error(e.message);
+        }
+        throw new Error('Temporary unavailable action! Try again later.')
     }
-    return await req.json();
 };

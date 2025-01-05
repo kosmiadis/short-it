@@ -6,6 +6,7 @@ export type UserAuthResponse = {
         email: string, 
         urls: Url[],
         created_at: string,
+        remaining_url_quota: number,
     },
     message: string,
 } | {

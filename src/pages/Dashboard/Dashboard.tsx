@@ -14,16 +14,13 @@ const Dashboard: React.FC = () => {
             <Link className="view_all" to='/urls'>View All</Link>
             <LatestUrls />
         </Page.PageSection>
-        
-        <div className="dashboard_secondary_wrapper">
         <Page.PageSection sectionTitle="Analytics" >
-            <Analytics />
-        </Page.PageSection>
+                <Analytics />
+            </Page.PageSection>
 
         <Page.PageSection sectionTitle="Shorten a URL" >
             <CreateLink />
         </Page.PageSection>
-        </div>
     </Page>
 }
 

@@ -18,14 +18,14 @@ export default function DetailsTopBar ({ url }: DetailsTopBarProps) {
 
     const navigate = useNavigate();
 
-    const { mutate: toggleStatusMutate, isPending: isToggleStatusPending,  } = useMutation({
+    const { mutate: toggleStatusMutate, isPending: isToggleStatusPending, isError: isToggleStatusError, error: toggleStatusError  } = useMutation({
         mutationFn: toggleStatus,
         onSuccess: () => {
             queryClient.invalidateQueries({queryKey: ['urls', url._id]})
         }
     });
 
-    const { mutate: deleteUrlMutate, isPending: deleteUrlIsPending } = useMutation({
+    const { mutate: deleteUrlMutate, isPending: deleteUrlIsPending, isError: isDeleteError, error: deleteError } = useMutation({
         mutationFn: deleteUrl,
         onSuccess: () => {
             navigate('/dashboard');
@@ -47,8 +47,10 @@ export default function DetailsTopBar ({ url }: DetailsTopBarProps) {
         }/></LoadingSection>}
 
         {deleteUrlIsPending && <LoadingSection><LoadingIndicatorTexted size="large" loadingText={'Deleting Url...'}/></LoadingSection>}
-        
-        {!isToggleStatusPending && <>
+
+        {isToggleStatusError || isDeleteError && <p>{toggleStatusError?.message || deleteError?.message}</p>}
+
+        {!isToggleStatusPending && !deleteUrlIsPending && <>
         <div className="quick_info">
             <a target="_blank" href={'http://localhost:3000/'+url.shortened_url}>short-it/{url.shortened_url}<img className="time_icon" src={linkImg}/></a>
             <span id={url.status}>{url.status.slice(0,1).toUpperCase() + url.status.slice(1)}</span>
@@ -63,31 +65,40 @@ export default function DetailsTopBar ({ url }: DetailsTopBarProps) {
 
 async function toggleStatus ({ status, url_id }: { status: 'active' | 'inactive', url_id: string }): Promise<MutateFunction<ToggleStatusResponse>> {
     const action = status === 'active' ? 'deactivate' : 'activate'
-    const req = await fetch('http://localhost:3000/url/'+action+'/'+url_id , {
-        method: "POST",
-        credentials: 'include',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
-    
-    if (!req.ok) {
-        throw await req.json();
+    try {
+        const req = await fetch('http://localhost:3000/url/'+action+'/'+url_id , {
+            method: "POST",
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        
+        if (!req.ok) {
+            throw await req.json();
+        }
+        return await req.json();
+    } catch (e) {
+        throw new Error(`Url ${status === 'active' ? 'deactivation failed' : 'activation failed'}, due to server problems! Try again later.`)
     }
-    return await req.json();
+    
 }
 
 async function deleteUrl ({ url_id }: { url_id: string }): Promise<MutateFunction<DeleteUrlResponse>> {
-    const req = await fetch('http://localhost:3000/url/delete/'+url_id , {
-        method: "DELETE",
-        credentials: 'include',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
-    
-    if (!req.ok) {
-        throw await req.json();
+    try {
+        const req = await fetch('http://localhost:3000/url/delete/'+url_id , {
+            method: "DELETE",
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        
+        if (!req.ok) {
+            throw await req.json();
+        }
+        return await req.json();
+    } catch (e) {
+        throw new Error('Url deletion failed, due to server problems! Try again later.')
     }
-    return await req.json();
 }

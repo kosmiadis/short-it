@@ -1,4 +1,5 @@
-import { createContext, useContext } from "react";
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useContext, useEffect } from "react";
 import { useState } from "react";
 
 type Theme = 'light' | 'dark';
@@ -17,27 +18,31 @@ export const useTheme = (): ThemeContext => useContext(ThemeCtx);
 
 const ThemeProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
 
-    /*
-        -- FIX IT LATER --
-        Theme starts of with dark mode from cached theme in localstorage
-    */
+
    
     const { theme: themeCtx } = useTheme();
 
     const [theme, setTheme] = useState<Theme>(themeCtx);
 
     const toggleTheme = () => {
-        setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light')
+
+        setTheme(prevTheme => {
+            const switchingTo = prevTheme === 'light' ? 'dark' : 'light'
+            localStorage.setItem('theme', switchingTo);
+            return switchingTo
+        })
     }
 
-    // const setCachedTheme: (theme: Theme) => void = (cachedTheme) => {
-    //     setTheme(cachedTheme);
-    // }
-
-    // useEffect(() => {
-    //     const cachedTheme = localStorage.getItem(theme) === 'light' ? 'light' : 'dark';
-    //     setCachedTheme(cachedTheme);
-    // },[])
+    //set cached theme
+    useEffect(() => {
+        const cachedTheme = localStorage.getItem('theme');
+        if (cachedTheme === 'light') {
+            setTheme('light');
+        }
+        else {
+            setTheme('dark');
+        }
+    },[])
 
     const themeValue: ThemeContext = {
         theme,

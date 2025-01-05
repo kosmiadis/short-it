@@ -41,6 +41,7 @@ export default function LatestUrlItem ({ urlItem }: UrlItemProps) {
             <span className='original_url'>  
                 {urlItem.original_url.split('//')[1]}
             </span>
+            
             <br />
             
             <span className='created_at'>

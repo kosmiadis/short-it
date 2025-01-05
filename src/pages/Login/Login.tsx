@@ -24,7 +24,7 @@ export default function Login () {
             setIsAuthorized(true);
             setAuthUser({ user: response!.user, message: response!.message })
             navigate('/dashboard');
-        },
+        }
     });
 
     const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
@@ -60,14 +60,22 @@ export default function Login () {
 }
 
 const login: MutationFunction<UserAuthResponse, {email: string, password: string}> = async ({email, password})  => {
-    const req = await fetch('http://localhost:3000/auth/login', {
-        method: "POST",
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-    });
-    if (!req.ok) {
-        throw await req.json();
+    try {
+        const req = await fetch('http://localhost:3000/auth/login', {
+            method: "POST",
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+        });
+        if (!req.ok) {
+            throw await req.json();    
+        }
+        return await req.json();
+    } catch (e) {
+        if (e.message === 'Invalid Credentials!' || e.message === 'User does not exist!') {
+            throw new Error(e.message);
+        }
+        throw new Error('Temporary unavailable action! Try again later.')
     }
-    return await req.json();
+    
 }

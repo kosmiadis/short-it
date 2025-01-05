@@ -19,9 +19,7 @@ export default function LatestUrls () {
 
     const sliceStart = urls.length <= 6 ? 0 : urls.length - 6 ;
     const sliceEnd = urls.length <= 6 ? 6 : urls.length;
-    console.log(sliceStart);
-    console.log(sliceEnd);
-
+    
     return <>
         <ul>
             {urls?.slice(sliceStart, sliceEnd).map(link => (

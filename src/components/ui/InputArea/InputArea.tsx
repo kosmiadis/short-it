@@ -13,7 +13,7 @@ const InputArea: React.FC<{inputRef?: RefObject<HTMLInputElement>, id: string, l
 }) => {
     return <div className='input_area required'> 
         {label && <label htmlFor={id}>{label}</label>}
-        <input placeholder={placeholder} ref={inputRef} type={type || 'text'} id={id} value={initialValue} name={id}/>
+        <input autoComplete='off' placeholder={placeholder} ref={inputRef} type={type || 'text'} id={id} value={initialValue} name={id}/>
     </div>
 }
 

@@ -1,9 +1,8 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useContext } from "react";
 import { Url } from "../types/Url";
-import { MutationFunction, useQuery } from "@tanstack/react-query";
-import { UserAuthResponse } from "../types/UserAuthResponse";
 import { queryClient } from "../query/queryClient";
 import { useAuth } from "./AuthProvider";
+import { useQuery } from "@tanstack/react-query";
 
 interface UrlsLoaderProviderContext {
     urls: Url[],
@@ -24,7 +23,7 @@ export default function UrlsLoaderProvider ({children}: {children: ReactNode}) {
 
     const {isAuthorized} = useAuth();
 
-    const { data, isPending, isError, error } = useQuery({
+    const { data, isPending } = useQuery({
         queryKey: ['urls'],
         queryFn: loadUrls,
         staleTime: 1000 * 60 * 5, // Cache for 5 minutes

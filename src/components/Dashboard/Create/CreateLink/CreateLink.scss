@@ -8,14 +8,8 @@ div.create_new_link {
     @media screen and (min-width: 696px) {
         margin-inline: unset;
     }
-    @media screen and (min-width: 1069px) {
-        margin-block: unset;
-        p {
-            display: none;
-        }
-    }
     p {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
     div.new_link {

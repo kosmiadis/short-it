@@ -1,7 +1,8 @@
 @import url('../../../styles/variables.css');
 
 div.details_body {
-
+    display: flex;
+    flex-direction: column;
     div.additional_info {
         margin-inline: auto;
         margin-top: 2rem;
@@ -13,7 +14,6 @@ div.details_body {
         p {
             margin: 0;
             display: flex;
-            align-items: center;
             gap: 4px;
             span.url_creation_date {
                 color: var(--secondary-font-color);
@@ -23,10 +23,23 @@ div.details_body {
         }
 
         p.original_redirect {
-            font-size: 1.2rem;
-            text-align: center;
+            font-size: 0.9rem;
+            max-width: 360px;
+            height: auto;
+            text-wrap: wrap;
+            flex-direction: column;
+
+            span {
+                margin-top: 10px;
+                font-size: 1.1rem;
+            }
 
             a.original_link {
+                font-size: 0.9rem;
+                
+                display: block;
+                overflow-x: hidden;
+                text-overflow: ellipsis;
                 font-size: var(--text-md);
                 color: var(--text-color); 
     
@@ -35,10 +48,21 @@ div.details_body {
                 }
             }
         }
-        
-
-
-        
     }
-    
+
+    span.copy_url_span {
+        font-weight: 600;
+        margin-inline: auto;
+
+       
+
+        &:hover {
+            cursor: pointer;
+            color: var(--accent-color);
+        }
+    }
+
+    span.copied {
+            color: var(--accent-color);
+    }
 }
