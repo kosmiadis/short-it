@@ -89,6 +89,8 @@ table {
                     display: table-cell;
                     max-width: 500px;
                     text-overflow: ellipsis;
+                    overflow: hidden;
+                    text-wrap: nowrap;
                 } 
             }
 

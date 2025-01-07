@@ -1,5 +1,9 @@
-export default interface ChartData {
+export type ChartData = {
     name: string,
     x: number,
-    y: number,
+    clicks: number,
+} | {
+    name: string,
+    x: number,
+    frequency: number,
 }

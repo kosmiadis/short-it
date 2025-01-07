@@ -1,127 +1,43 @@
 import { useState } from "react";
 import Tabs from "./Tabs/Tabs";
 import TabContent from "./TabContent/TabContent";
-import ChartData from "../../../types/ChartData";
 import ClicksChart from "./ClicksChart/ClicksChart";
-import DevicesChart from "./DevicesChart/DevicesChart";
-import CountriesChart from "./CountriesChart/CountriesChart";
+import { AnalyticsResponse } from "../../../types/AnalyticsResponse";
+import { useQuery } from "@tanstack/react-query";
+import LoadingSection from "../../ui/LoadingSection/LoadingSection";
+import LoadingIndicatorTexted from "../../ui/LoadingIndicatorTexted/LoadingIndicatorTexted";
+import AnalyticsBarChart from "./AnalyticsBarChart/AnalyticsBarChart";
+import './AnalyticsTabs.css';
 
 export type Analytic = 'clicks' | 'devices' | 'countries';
 
-export default function AnalyticsTabs () {
+export default function AnalyticsTabs ({url_id}: {url_id: string}) {
 
     const [currentAnalytic, setCurrentAnalytic] = useState<Analytic>('clicks')
     let tabContent;
 
-    const dummyClicksTemporaryData: ChartData[] = [
-        {
-            name: 'January',
-            x: 1,
-            y: 29
-        },
-        {
-            name: 'Februray',
-            x: 2,
-            y: 42
-        },
-        {
-            name: 'March',
-            x: 2,
-            y: 2
-        },
-        {
-            name: 'April',
-            x: 2,
-            y: 4
-        },
-        {
-            name: 'May',
-            x: 2,
-            y: 55
-        },
-        {
-            name: 'June',
-            x: 2,
-            y: 122
-        },
-        {
-            name: 'July',
-            x: 2,
-            y: 156
-        },
-        {
-            name: 'August',
-            x: 2,
-            y: 222
-        },
-        {
-            name: 'September',
-            x: 2,
-            y: 67
-        },
-        {
-            name: 'October',
-            x: 2,
-            y: 56
-        },
-        {
-            name: 'November',
-            x: 2,
-            y: 45
-        },
-        {
-            name: 'December',
-            x: 2,
-            y: 42
-        },
-    ]
-
-    const dummyDevicesTemporaryData: ChartData[] = [
-        {
-            name: 'Desktop',
-            x: 1,
-            y: 243
-        },
-        {
-            name: 'Mobile',
-            x: 2,
-            y: 110
-        },
-        {
-            name: 'TV',
-            x: 3,
-            y: 2
-        },
-    ]
-
-    const dummyCountriesTemporaryData: ChartData[] = [
-        {
-            name: 'Greece',
-            x: 1,
-            y: 1234
-        },
-        {
-            name: 'UK',
-            x: 2,
-            y: 188
-        },
-        {
-            name: 'USA',
-            x: 1,
-            y: 159
-        },
-    ]
-
-    if (currentAnalytic === 'clicks') {
-        tabContent = <ClicksChart data={dummyClicksTemporaryData} />
+    const { data, isPending, isError, error } = useQuery({
+        queryKey: ['analytics'],
+        queryFn: () => loadAnalytics({ url_id })
+    })
+    
+    //check if there are any analytics to show.
+    const noData = data?.clicks?.filter((click) => click?.clicks > 0).length === 0;
+    console.log(noData);
+    if (!isPending && noData) {
+        tabContent = <p className="no_analytics">No Analytics to show!</p>
     }
 
-    if (currentAnalytic === 'devices') { 
-        tabContent = <DevicesChart data={dummyDevicesTemporaryData} />
+    if (!noData && data && currentAnalytic === 'clicks') {
+        tabContent = <ClicksChart data={data.clicks || []} />
     }
 
-    if (currentAnalytic === 'countries') { 
-        tabContent = <CountriesChart data={dummyCountriesTemporaryData} />
+    if (!noData && data && currentAnalytic === 'devices') { 
+        tabContent = <AnalyticsBarChart data={data.devices || []} />
+    }
+
+    if (!noData && data && currentAnalytic === 'countries') { 
+        tabContent = <AnalyticsBarChart data={data.countries || []} />
     }
 
     function toggleTab (identifier: Analytic) {
@@ -129,9 +45,33 @@ export default function AnalyticsTabs () {
     }
 
     return <div className="tabs_analytics">
-        <Tabs currentAnalytic={currentAnalytic} toggleTab={toggleTab} />
-        <TabContent>
-            {tabContent}
-        </TabContent>
+        {isPending && <LoadingSection><LoadingIndicatorTexted size="medium" loadingText="Loading Analytics..."/></LoadingSection>}
+        {isError && <p>{error.message}</p>}
+        {!isPending && data && 
+        <>
+            <Tabs currentAnalytic={currentAnalytic} toggleTab={toggleTab} />
+            <TabContent>
+                {tabContent}
+            </TabContent>
+        </>
+        }
     </div>
+}
+
+async function loadAnalytics ({url_id}: {url_id: string}): Promise<AnalyticsResponse> {
+    try {
+        const req = await fetch('http://localhost:3000/analytics/'+url_id , {
+            method: "GET",
+            credentials: 'include',
+        });
+        
+        if (!req.ok) {
+            throw await req.json();
+        }
+        return await req.json();
+    }
+    catch (e) {
+        throw new Error('Analytics could not be loaded :(')
+    }
+    
 }

@@ -4,6 +4,7 @@ import { Url } from "../../../types/Url"
 import Button from "../../ui/Button/Button"
 import timeImg from '../../../assets/time.png';
 import { useNavigate } from "react-router-dom";
+import { queryClient } from '../../../query/queryClient';
 
 type UrlItemProps = {
     urlItem: Url
@@ -22,6 +23,7 @@ export default function LatestUrlItem ({ urlItem }: UrlItemProps) {
     }
 
     const handleView = () => {
+        queryClient.clear();
         navigate(`/urls/${urlItem._id}`)
     }
 
@@ -46,7 +48,7 @@ export default function LatestUrlItem ({ urlItem }: UrlItemProps) {
             
             <span className='created_at'>
                 <img className="time_icon" src={timeImg} alt='time' />
-                {urlItem.created_at}
+                {urlItem.created_at.split(' ')[0]}
             </span>
             
     </li> 

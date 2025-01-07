@@ -34,13 +34,13 @@ export default function UrlDetailsPage () {
         </Page.PageSection>
 
         <Page.PageSection sectionTitle="Analytics">
-            <AnalyticsTabs />
+            <AnalyticsTabs url_id={params.urlId!}/>
         </Page.PageSection>
         </>}
     </Page>
 }
 
-export async function loadUrl ({url_id}: {url_id: string}): Promise<GetUrlResponse> {
+async function loadUrl ({url_id}: {url_id: string}): Promise<GetUrlResponse> {
     const req = await fetch('http://localhost:3000/url/'+url_id , {
         method: "GET",
         credentials: 'include',
